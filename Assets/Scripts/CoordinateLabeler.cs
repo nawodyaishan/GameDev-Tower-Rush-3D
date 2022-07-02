@@ -13,6 +13,7 @@ namespace Assets.Scripts
         void Awake()
         {
             label = GetComponent<TextMeshPro>();
+            DisplayCurrentCoordinates();
         }
 
         void Start()
@@ -24,16 +25,22 @@ namespace Assets.Scripts
             if (!Application.isPlaying)
             {
                 DisplayCurrentCoordinates();
+                UpdateObjectName();
             }
         }
 
         private void DisplayCurrentCoordinates()
         {
             // Assigning Parent Game Object position vectors 
-            coordinates.x = Mathf.RoundToInt(transform.parent.position.x);
-            coordinates.y = Mathf.RoundToInt(transform.parent.position.z);
-            
+            coordinates.x = Mathf.RoundToInt(transform.parent.position.x / UnityEditor.EditorSnapSettings.move.x);
+            coordinates.y = Mathf.RoundToInt(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.z);
+
             label.text = $"{coordinates.x} : {coordinates.y}";
+        }
+
+        void UpdateObjectName()
+        {
+            transform.parent.name = coordinates.ToString();
         }
     }
 }
