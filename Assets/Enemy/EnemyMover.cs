@@ -7,24 +7,24 @@ namespace Assets.Enemy
 {
     public class EnemyMover : MonoBehaviour
     {
-        [SerializeField] private List<Waypoint> _size = new List<Waypoint>();
+        [SerializeField] List<Waypoint> _path = new List<Waypoint>();
+        [SerializeField] float _waitTime = 1f;
 
         void Start()
         {
-            StopCoroutine(PrintWaypointName());
-            //  InvokeRepeating("PrintWaypointName", 0,1f);
+            StartCoroutine(FollowPath());
         }
 
         void Update()
         {
         }
 
-        IEnumerator PrintWaypointName()
+        IEnumerator FollowPath()
         {
-            foreach (var waypoint in _size)
+            foreach (Waypoint waypoint in _path)
             {
-                Debug.Log(waypoint.name);
-                yield return new WaitForSeconds(1f);
+                transform.position = new Vector3(waypoint.transform.position.x, 5f, waypoint.transform.position.z);
+                yield return new WaitForSeconds(_waitTime);
             }
         }
     }
