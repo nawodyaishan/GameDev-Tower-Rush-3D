@@ -1,18 +1,18 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Tiles
 {
     [ExecuteAlways]
     public class CoordinateLabeler : MonoBehaviour
     {
-        private TextMeshPro label;
+        private TextMeshPro _label;
 
-        Vector2Int coordinates = new Vector2Int();
+        Vector2Int _coordinates = new Vector2Int();
 
         void Awake()
         {
-            label = GetComponent<TextMeshPro>();
+            _label = GetComponent<TextMeshPro>();
             DisplayCurrentCoordinates();
         }
 
@@ -32,15 +32,15 @@ namespace Assets.Scripts
         private void DisplayCurrentCoordinates()
         {
             // Assigning Parent Game Object position vectors 
-            coordinates.x = Mathf.RoundToInt(transform.parent.position.x / UnityEditor.EditorSnapSettings.move.x);
-            coordinates.y = Mathf.RoundToInt(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.z);
+            _coordinates.x = Mathf.RoundToInt(transform.parent.position.x / UnityEditor.EditorSnapSettings.move.x);
+            _coordinates.y = Mathf.RoundToInt(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.z);
 
-            label.text = $"{coordinates.x} : {coordinates.y}";
+            _label.text = $"{_coordinates.x} : {_coordinates.y}";
         }
 
         void UpdateObjectName()
         {
-            transform.parent.name = coordinates.ToString();
+            transform.parent.name = _coordinates.ToString();
         }
     }
 }

@@ -1,7 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
+using Assets.Tiles;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Enemy
 {
     public class EnemyMover : MonoBehaviour
     {
@@ -9,18 +11,20 @@ namespace Assets.Scripts
 
         void Start()
         {
-            PrintWaypointName();
+            StopCoroutine(PrintWaypointName());
+            //  InvokeRepeating("PrintWaypointName", 0,1f);
         }
 
         void Update()
         {
         }
 
-        void PrintWaypointName()
+        IEnumerator PrintWaypointName()
         {
             foreach (var waypoint in _size)
             {
                 Debug.Log(waypoint.name);
+                yield return new WaitForSeconds(1f);
             }
         }
     }
