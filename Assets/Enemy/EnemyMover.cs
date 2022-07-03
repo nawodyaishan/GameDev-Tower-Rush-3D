@@ -15,10 +15,6 @@ namespace Assets.Enemy
             StartCoroutine(FollowPath());
         }
 
-        void Update()
-        {
-        }
-
         IEnumerator FollowPath()
         {
             foreach (Waypoint waypoint in _path)
