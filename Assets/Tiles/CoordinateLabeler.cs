@@ -16,10 +16,6 @@ namespace Assets.Tiles
             DisplayCurrentCoordinates();
         }
 
-        void Start()
-        {
-        }
-
         void Update()
         {
             if (!Application.isPlaying)
@@ -28,7 +24,7 @@ namespace Assets.Tiles
                 UpdateObjectName();
             }
         }
-
+        
         private void DisplayCurrentCoordinates()
         {
             // Assigning Parent Game Object position vectors 
