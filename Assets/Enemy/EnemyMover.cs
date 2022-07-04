@@ -8,7 +8,7 @@ namespace Assets.Enemy
     public class EnemyMover : MonoBehaviour
     {
         [SerializeField] List<Waypoint> _path = new List<Waypoint>();
-        [SerializeField] private float enemySpeed = 1f;
+        [SerializeField] [Range(0f, 5f)] private float enemySpeed = 1f;
 
         void Start()
         {
