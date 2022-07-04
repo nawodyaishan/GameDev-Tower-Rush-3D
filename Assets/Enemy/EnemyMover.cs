@@ -8,7 +8,6 @@ namespace Assets.Enemy
     public class EnemyMover : MonoBehaviour
     {
         [SerializeField] List<Waypoint> _path = new List<Waypoint>();
-        [SerializeField] float _waitTime = 1f;
 
         void Start()
         {
@@ -19,9 +18,18 @@ namespace Assets.Enemy
         {
             foreach (Waypoint waypoint in _path)
             {
-                transform.position = new Vector3(waypoint.transform.position.x, gameObject.transform.position.y,
-                    waypoint.transform.position.z);
-                yield return new WaitForSeconds(_waitTime);
+                // Using Lerp Linear Interpolation
+                Vector3 startPosition = transform.position;
+                Vector3 endPosition = waypoint.transform.position;
+
+                float travelPercent = 0f;
+
+                while (travelPercent < 1f)
+                {
+                    travelPercent += Time.deltaTime;
+                    transform.position = Vector3.Lerp(startPosition, endPosition, travelPercent);
+                    yield return new WaitForEndOfFrame();
+                }
             }
         }
     }
