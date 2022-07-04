@@ -8,6 +8,7 @@ namespace Assets.Enemy
     public class EnemyMover : MonoBehaviour
     {
         [SerializeField] List<Waypoint> _path = new List<Waypoint>();
+        [SerializeField] private float enemySpeed = 1f;
 
         void Start()
         {
@@ -22,11 +23,17 @@ namespace Assets.Enemy
                 Vector3 startPosition = transform.position;
                 Vector3 endPosition = waypoint.transform.position;
 
+                // Looking at end position to face correct travel direction
+                transform.LookAt(endPosition);
+
                 float travelPercent = 0f;
 
                 while (travelPercent < 1f)
                 {
-                    travelPercent += Time.deltaTime;
+                    // Adding Movement Incrementation
+                    travelPercent += Time.deltaTime * enemySpeed;
+
+                    // Calling Vector3.Lerp function
                     transform.position = Vector3.Lerp(startPosition, endPosition, travelPercent);
                     yield return new WaitForEndOfFrame();
                 }
