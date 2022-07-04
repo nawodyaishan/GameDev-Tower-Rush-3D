@@ -19,7 +19,8 @@ namespace Assets.Enemy
         {
             foreach (Waypoint waypoint in _path)
             {
-                transform.position = new Vector3(waypoint.transform.position.x, 5f, waypoint.transform.position.z);
+                transform.position = new Vector3(waypoint.transform.position.x, gameObject.transform.position.y,
+                    waypoint.transform.position.z);
                 yield return new WaitForSeconds(_waitTime);
             }
         }
